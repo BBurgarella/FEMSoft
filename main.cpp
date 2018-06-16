@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <Elements.h>
+#include <Mesher.h>
+
 using namespace Eigen;
 using namespace std;
 
