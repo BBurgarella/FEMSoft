@@ -1,7 +1,12 @@
 #include <Behaviors.h>
+#include <iostream>
 #include <Eigen/Dense>
 #include <math.h>
 using namespace Eigen;
+
+// Prototypes
+
+MatrixXd CalculateRotationMat(double angle);
 
 
 /*  ########################################
@@ -78,7 +83,7 @@ class BarElement
 
         double self_Section;                    // Surface of the section of the bar element
         int self_ID;                            // ID of the element
-        double self_Length;                          // Length of the element
+        double self_Length, self_angle;         // Length of the element
         Node self_Node1, self_Node2;            // Nodes, as defined by the Node class
         double self_strain, self_stress;        // Current stress and strain values in the BarElement
         ElasticMaterial self_Material;          // Assignation of the material to the bar element
@@ -100,9 +105,25 @@ class BarElement
            self_stress = self_Material.HookeLaw(self_strain);
         }
 
-        /*Fills up the bar element stiffness matrix with the material properties*/
-        void BuidStiffness(void)
+        /*build the generalized stiffness matrix*/
+        MatrixXd GeneralizedMat(int NbNodes)
         {
+            MatrixXd tempStiffnessMat;
+            tempStiffnessMat = MatrixXd::Zero(2*NbNodes, 4); // Initiate with an 2Nx2N empty matrix;
+            for (int i=0;i<=2*NbNodes;i++)
+            {
+                if (self_Node1.self_ID != i/2 and self_Node2.self_ID != i/2)
+                {
+                    std::cout <<i<<std::endl;
+                    std::cout <<"----------------------------------"<<std::endl;
+                    std::cout <<self_StiffnessMat.topRows(i)<<std::endl;
+                    tempStiffnessMat.Row(i)=self_StiffnessMat.Row(i);
+                    std::cout <<"--------------Generalized------------------"<<std::endl;
+                    std::cout <<tempStiffnessMat<<std::endl;
+                    //tempStiffnessMat.bottomRows(i-2)=self_StiffnessMat.bottomRows(i-2);
+                }
+            }
+            return tempStiffnessMat;
 
         }
 };
@@ -114,6 +135,7 @@ BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial M
     self_Node1 = Node1;
     self_Node2 = Node2;
     self_Length = sqrt(pow(Node1.self_X-Node2.self_X,2)+pow(Node1.self_Y-Node2.self_Y,2));
+    self_angle = atan((Node1.self_Y-Node2.self_Y)/(Node1.self_X-Node2.self_X));
     self_Section = Section;
     self_Material = Material;
     self_ID = ID;
@@ -122,6 +144,7 @@ BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial M
     self_StiffnessMat(2,2)= Factor;
     self_StiffnessMat(0,2)= -Factor;
     self_StiffnessMat(2,0)= -Factor;
+    self_StiffnessMat = (self_StiffnessMat*(CalculateRotationMat(self_angle)));
     return;
 
 }
@@ -131,5 +154,22 @@ BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial M
 std::ostream &operator<<(std::ostream &os, BarElement const &m)
 {
     return os <<"This is a bar element(ID: "<<m.self_ID<<") linking the\n"<<m.self_Node1<<" and "<<m.self_Node2<<"\nWith a section surface of "<<m.self_Section<<" square meters\nAnd a length of "<<m.self_Length;
+}
+
+/* Définition de fonctions */
+
+MatrixXd CalculateRotationMat(double angle)
+// Computes the rotation matrix from an angle
+{
+    MatrixXd tempR = MatrixXd::Zero(4, 4);
+    tempR(0,0) = cos(angle);
+    tempR(0,1) = sin(angle);
+    tempR(1,0) = -sin(angle);
+    tempR(1,1) = cos(angle);
+    tempR(2,2) = cos(angle);
+    tempR(3,2) = -sin(angle);
+    tempR(2,3) = sin(angle);
+    tempR(3,3) = cos(angle);
+    return tempR;
 }
 

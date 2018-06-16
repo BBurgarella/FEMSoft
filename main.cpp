@@ -15,5 +15,7 @@ int main()
     cout <<"Coordonnees du premier Noeud: "<< TestMesh.self_NodeArray[0] <<endl;
     cout <<"premier Element: "<< TestMesh.self_ElemArray[0] <<endl;
     cout << TestMesh.self_ElemArray[0].self_StiffnessMat <<endl;
+    TestMesh.assemble();
+    cout << TestMesh.self_MeshStiffnessMat <<endl;
 }
 

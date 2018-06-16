@@ -44,6 +44,8 @@ class Mesh
         vector<Node> self_NodeArray;
         vector<BarElement> self_ElemArray;
         vector<ElasticMaterial> self_MatArray;
+        MatrixXd self_MeshStiffnessMat;
+
 
         //Prototypes
         Mesh(int NDArraySize, int ElemArraySize, int MatArraySize);
@@ -52,6 +54,17 @@ class Mesh
 
 
         // Methods definition
+        void assemble()
+        /* This method creates the model stiffness matrix that will be used to solve the problem */
+        {
+            int NbNodes = self_NodeArray.size();
+            self_MeshStiffnessMat = MatrixXd::Zero(2*NbNodes, 4); // Initiate with an 2Nx2N empty matrix
+            for(int i=0;i<self_ElemArray.size();i++)
+            {
+                // Fills up the matrix using simple addition of the generalized matrices
+                self_MeshStiffnessMat = self_MeshStiffnessMat + self_ElemArray[i].GeneralizedMat(NbNodes);
+            }
+        }
 
 };
 

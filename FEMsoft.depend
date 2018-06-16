@@ -14,20 +14,21 @@
 
 1529101920 c:\users\boris\documents\fem\femsoft\include\behaviors.h
 
-1529163540 source:c:\users\boris\documents\github\femsoft\main.cpp
+1529174751 source:c:\users\boris\documents\github\femsoft\main.cpp
 	<iostream>
 	<Eigen/Dense>
 	<Elements.h>
 	<Mesher.h>
 
-1529163792 c:\users\boris\documents\github\femsoft\include\\elements.h
+1529176004 c:\users\boris\documents\github\femsoft\include\\elements.h
 	<Behaviors.h>
+	<iostream>
 	<Eigen/Dense>
 	<math.h>
 
 1529159825 c:\users\boris\documents\github\femsoft\include\\behaviors.h
 
-1529162798 c:\users\boris\documents\github\femsoft\include\\mesher.h
+1529175578 c:\users\boris\documents\github\femsoft\include\\mesher.h
 	<iostream>
 	<fstream>
 	<vector>
