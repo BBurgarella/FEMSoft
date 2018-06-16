@@ -106,24 +106,54 @@ class BarElement
         }
 
         /*build the generalized stiffness matrix*/
+        /* There might be a faster way to do this but I need to come back on this later */
         MatrixXd GeneralizedMat(int NbNodes)
         {
-            MatrixXd tempStiffnessMat;
-            tempStiffnessMat = MatrixXd::Zero(2*NbNodes, 4); // Initiate with an 2Nx2N empty matrix;
-            for (int i=0;i<=2*NbNodes;i++)
+            MatrixXd tempStiffnessMat,tempStiffnessMat2;
+
+            /* First, I initiate with an 2Nx4 empty matrix this allows the
+            progressive filling of the generalized stiffness matrix by add lines
+            of zero at the position of the nodes that are not used */
+            tempStiffnessMat = MatrixXd::Zero(2*NbNodes, 4);
+            for (int i=0;i<=2*NbNodes;i+=2)
             {
-                if (self_Node1.self_ID != i/2 and self_Node2.self_ID != i/2)
+                if (self_Node1.self_ID == i/2)
                 {
-                    std::cout <<i<<std::endl;
-                    std::cout <<"----------------------------------"<<std::endl;
-                    std::cout <<self_StiffnessMat.topRows(i)<<std::endl;
-                    tempStiffnessMat.Row(i)=self_StiffnessMat.Row(i);
-                    std::cout <<"--------------Generalized------------------"<<std::endl;
-                    std::cout <<tempStiffnessMat<<std::endl;
-                    //tempStiffnessMat.bottomRows(i-2)=self_StiffnessMat.bottomRows(i-2);
+                    /* If the cursor is on the nodes (here the first node) that are linked to the element,
+                    use the element stiffness matrix rows */
+                    tempStiffnessMat.row(i)=self_StiffnessMat.row(0);
+                    tempStiffnessMat.row(i+1)=self_StiffnessMat.row(1);
+                }
+                else if (self_Node2.self_ID == i/2)
+                {
+                    /* If the cursor is on the nodes (here the second node) that are linked to the element,
+                    use the element stiffness matrix rows */
+                    tempStiffnessMat.row(i)=self_StiffnessMat.row(2);
+                    tempStiffnessMat.row(i+1)=self_StiffnessMat.row(3);
                 }
             }
-            return tempStiffnessMat;
+            /* Then, I initiate a second matrix with an 2Nx2N empty matrix this allows the
+            progressive filling of the generalized stiffness matrix by add columns
+            of zero at the position of the nodes that are not used */
+            tempStiffnessMat2 = MatrixXd::Zero(2*NbNodes,2*NbNodes);
+            for (int i=0;i<=2*NbNodes;i+=2)
+            {
+                if (self_Node1.self_ID == i/2)
+                {
+                    /* If the cursor is on the nodes (here the first node) that are linked to the element,
+                    use the element stiffness matrix columns */
+                    tempStiffnessMat2.col(i)=tempStiffnessMat.col(0);
+                    tempStiffnessMat2.col(i+1)=tempStiffnessMat.col(1);
+                }
+                else if (self_Node2.self_ID == i/2)
+                {
+                    /* If the cursor is on the nodes (here the second node) that are linked to the element,
+                    use the element stiffness matrix columns */
+                    tempStiffnessMat2.col(i)=tempStiffnessMat.col(2);
+                   tempStiffnessMat2.col(i+1)=tempStiffnessMat.col(3);
+                }
+            }
+            return tempStiffnessMat2;
 
         }
 };
@@ -132,19 +162,30 @@ class BarElement
 
 BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial Material, int ID)
 {
+    // Init. the nodes
     self_Node1 = Node1;
     self_Node2 = Node2;
+
+    // Calculates the angle of the element and its length
     self_Length = sqrt(pow(Node1.self_X-Node2.self_X,2)+pow(Node1.self_Y-Node2.self_Y,2));
-    self_angle = atan((Node1.self_Y-Node2.self_Y)/(Node1.self_X-Node2.self_X));
+    self_angle = atan((Node2.self_Y-Node1.self_Y)/(Node2.self_X-Node1.self_X));
+
+    // Init. the section surface, material and ID
     self_Section = Section;
     self_Material = Material;
     self_ID = ID;
+
+    /* Generation of the stiffness matrix of the element */
     double Factor = (self_Material.self_Young*self_Section)/self_Length;
     self_StiffnessMat(0,0)= Factor;
     self_StiffnessMat(2,2)= Factor;
     self_StiffnessMat(0,2)= -Factor;
     self_StiffnessMat(2,0)= -Factor;
-    self_StiffnessMat = (self_StiffnessMat*(CalculateRotationMat(self_angle)));
+
+    /* If the element angle is != 0, we need to rotate this matrix */
+    MatrixXd RotMat=CalculateRotationMat(self_angle);
+    MatrixXd RotMatT = RotMat.transpose();
+    self_StiffnessMat = RotMatT*self_StiffnessMat*RotMat;
     return;
 
 }

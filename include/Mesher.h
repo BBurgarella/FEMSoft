@@ -58,9 +58,10 @@ class Mesh
         /* This method creates the model stiffness matrix that will be used to solve the problem */
         {
             int NbNodes = self_NodeArray.size();
-            self_MeshStiffnessMat = MatrixXd::Zero(2*NbNodes, 4); // Initiate with an 2Nx2N empty matrix
+            self_MeshStiffnessMat = MatrixXd::Zero(2*NbNodes, 2*NbNodes); // Initiate with an 2Nx2N empty matrix
             for(int i=0;i<self_ElemArray.size();i++)
             {
+                std::cout << "Element "<<i<<" angle: "<<self_ElemArray[i].self_angle<<std::endl;
                 // Fills up the matrix using simple addition of the generalized matrices
                 self_MeshStiffnessMat = self_MeshStiffnessMat + self_ElemArray[i].GeneralizedMat(NbNodes);
             }
@@ -80,7 +81,7 @@ Mesh::Mesh(string FileName)
     // Open file
     ifstream inputFile(FileName.c_str());
     string Line;
-    vector<int> Init;
+    vector<float> Init;
     if (inputFile.is_open())
     {
         while(!inputFile.eof())
@@ -96,7 +97,7 @@ Mesh::Mesh(string FileName)
                 while( ss.good() )
                 {
                     string substr;
-                    int val;
+                    float val;
                     getline( ss, substr, ',' );
                     std::istringstream(substr) >> val;
                     Init.push_back(val);
@@ -117,7 +118,7 @@ Mesh::Mesh(string FileName)
                 while( ss.good() )
                 {
                     string substr;
-                    int val;
+                    float val;
                     getline( ss, substr, ',' );
                     std::istringstream(substr) >> val;
                     Init.push_back(val);
@@ -137,7 +138,7 @@ Mesh::Mesh(string FileName)
                 while( ss.good() )
                 {
                     string substr;
-                    int val;
+                    float val;
                     getline( ss, substr, ',' );
                     std::istringstream(substr) >> val;
                     Init.push_back(val);

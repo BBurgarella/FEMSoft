@@ -7,11 +7,11 @@ M,0,1,0.5
 # Nodes
 # N,ID,X,Y
 N,0,0,0
-N,1,1,0
-N,2,2,0
+N,1,1,1
+
 
 # Elements
 # B,ID,Node1,Node2,Section,Material
 B,0,0,1,1,0
-B,1,1,2,1,0
+
 
