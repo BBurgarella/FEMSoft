@@ -3,7 +3,7 @@ A simple C++ FEM soft that I programed to train C++
 
 To create a model, you have to use a text file named **Model.ent** (the ability to use different names will be implemented later) This file defines the mesh class that builds and stores the model based on data given in a text file. Such a file should be as follow:
 
-'''
+```
 #### Comment with  the sharp symbol ####
 
 #Ids are assigned for each line of definition, the first material gets
@@ -22,4 +22,4 @@ N,1,X2(double),Y2(double),Z2(double)
 
 # Bar Element Definition
 B,1,Node1ID(int),Node2ID(Int),Section surface (double),MaterialID
-'''
+```
