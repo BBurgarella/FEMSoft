@@ -14,3 +14,13 @@
 
 1529101920 c:\users\boris\documents\fem\femsoft\include\behaviors.h
 
+1529121504 source:c:\users\boris\documents\github\femsoft\main.cpp
+	<iostream>
+	<Eigen/Dense>
+	<Elements.h>
+
+1529121569 c:\users\boris\documents\github\femsoft\include\\elements.h
+	<Behaviors.h>
+
+1529120444 c:\users\boris\documents\github\femsoft\include\\behaviors.h
+
