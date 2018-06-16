@@ -20,9 +20,9 @@ M, ID, Young Modulus(int),Poisson Ratio(double)
 
 # Node definition
 # Node 0
-N,0,X(double),Y(double),Z(double)
+N,0,X(double),Y(double)
 # Node 1
-N,1,X2(double),Y2(double),Z2(double)
+N,1,X2(double),Y2(double)
 
 # Bar Element Definition
 B,1,Node1ID(int),Node2ID(Int),Section surface (double),MaterialID
@@ -110,7 +110,7 @@ Mesh::Mesh(string FileName)
                     Init.push_back(val);
                 }
                 // Creates the new material
-                Node New_Node(Init[1],Init[2],Init[3],Init[0]);
+                Node New_Node(Init[1],Init[2],Init[0]);
                 Init.clear();
                 // Pushes the material in the Material vector
                 self_NodeArray.push_back(New_Node);
