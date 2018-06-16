@@ -14,9 +14,10 @@ class Node
         // Attributes
 
         Node(void);
-        Node(double X, double Y, double Z);
+        Node(double X, double Y, double Z, int ID);
 
         double self_X,self_Y,self_Z;
+        int self_ID;
 
         // Methods
 
@@ -39,16 +40,18 @@ Node::Node(void)
     self_X = 0;
     self_Y = 0;
     self_Z = 0;
+    self_ID = -1; // ID at -1 means that the node has not been initialized
     return;
 }
 
 /*Coordinates  builder */
 
-Node::Node(double X,double Y,double Z)
+Node::Node(double X,double Y,double Z,int ID)
 {
     self_X = X;
     self_Y = Y;
     self_Z = Z;
+    self_ID = ID;
     return;
 }
 
@@ -56,7 +59,7 @@ Node::Node(double X,double Y,double Z)
 // When the User want to print a Node
 std::ostream &operator<<(std::ostream &os, Node const &m)
 {
-    return os <<"("<<m.self_X<<","<<m.self_Y<<","<<m.self_Z<<")";
+    return os <<"Node #"<<m.self_ID<<" at the coordinates: ("<<m.self_X<<","<<m.self_Y<<","<<m.self_Z<<")";
 }
 
 /*  ###############################################
@@ -73,10 +76,11 @@ class BarElement
         // Attributes
 
         double self_Section; // Surface of the section of the bar element
+        int self_ID;
         Node self_Node1, self_Node2; // Nodes, as defined by the Node class
         double self_strain, self_stress; // Current stress and strain values in the BarElement
         ElasticMaterial self_Material; // Assignation of the material to the bar element
-        BarElement(Node Node1,Node Node2, double Section, ElasticMaterial Material);
+        BarElement(Node Node1,Node Node2, double Section, ElasticMaterial Material, int ID);
 
 
         // Methods
@@ -103,14 +107,15 @@ class BarElement
         }
 };
 
-/* void builder */
+/* builder */
 
-BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial Material)
+BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial Material, int ID)
 {
     self_Node1 = Node1;
     self_Node2 = Node2;
     self_Section = Section;
     self_Material = Material;
+    self_ID = ID;
     return;
 
 }
@@ -119,6 +124,6 @@ BarElement::BarElement(Node Node1, Node Node2, double Section, ElasticMaterial M
 // When the User want to print a Node
 std::ostream &operator<<(std::ostream &os, BarElement const &m)
 {
-    return os <<"This is a bar element linking the nodes "<<m.self_Node1<<" and "<<m.self_Node2<<" With a section surface of "<<m.self_Section<<" square meters";
+    return os <<"This is a bar element(ID: "<<m.self_ID<<") linking the "<<m.self_Node1<<" and "<<m.self_Node2<<" With a section surface of "<<m.self_Section<<" square meters";
 }
 

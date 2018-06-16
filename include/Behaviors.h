@@ -5,9 +5,10 @@ class ElasticMaterial
         // Attributes
 
         int self_Young;
+        int self_ID;
         double self_Nu;
         ElasticMaterial(void);
-        ElasticMaterial(int Young, double Nu);
+        ElasticMaterial(int Young, double Nu, int MatID);
 
         // Methods
 
@@ -31,13 +32,15 @@ ElasticMaterial::ElasticMaterial(void)
 {
     self_Young = 0;
     self_Nu = 0;
+    self_ID = -1;
     return;
 }
 
 
-ElasticMaterial::ElasticMaterial(int Young, double Nu)
+ElasticMaterial::ElasticMaterial(int Young, double Nu, int ID)
 {
     self_Young = Young;
     self_Nu = Nu;
+    self_ID = ID;
     return;
 }

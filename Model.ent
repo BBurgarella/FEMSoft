@@ -1,0 +1,12 @@
+#### Simple model to test the mesher ####
+
+# Nano
+M,0,9000,0.5
+
+# Nodes
+N,0,0,0,0
+N,1,1,1,1
+N,2,50,0,25
+
+# Elements
+B,0,1,2,1,1
