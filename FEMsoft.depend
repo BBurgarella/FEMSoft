@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1529100457 source:c:\users\boris\documents\fem\femsoft\src\elastic.cpp
+	"Elastic.h"
+
+1529100455 c:\users\boris\documents\fem\femsoft\include\elastic.h
+
+1529102738 source:c:\users\boris\documents\fem\femsoft\main.cpp
+	<iostream>
+	<Eigen/Dense>
+	<Elements.h>
+
+1529102926 c:\users\boris\documents\fem\femsoft\include\elements.h
+	<Behaviors.h>
+
+1529101920 c:\users\boris\documents\fem\femsoft\include\behaviors.h
+
