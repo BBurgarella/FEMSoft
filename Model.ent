@@ -1,6 +1,26 @@
 #### Simple model to test the mesher ####
 
-# Nano
+#    Example case:
+#
+#
+#           2 
+#         / |
+#        0__1
+#        
+#   Node 0 and 1 are pinned and there is a force on the node 3
+#   -----> Fx = 2; Fy = 1
+#   the material used is a fictional material with a young modulus equal to 1
+#   and the section of the bar elements is also 1
+
+#######################################################
+#         Warning ! do not attemps calculations       #
+#           on structures that are not rigid          #
+#             (i.e. open shapes or lines)             #
+#         this makes the stiffness matrix sigular     #
+#           and therefore prevent calculation         #
+#######################################################
+
+# Fictional material
 # M, ID, Young,Nu
 M,0,1,0.5
 
@@ -28,7 +48,4 @@ U,Y,1,0
 # F,X or Y,NodeID,value
 F,X,2,2
 F,Y,2,1
-
-
-
 
