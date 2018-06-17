@@ -34,11 +34,24 @@
 	<vector>
 	<sstream>
 
-1529200760 source:e:\github\femsoft\main.cpp
+1529256407 source:e:\github\femsoft\main.cpp
 	<iostream>
 	<Eigen/Dense>
 	<Elements.h>
 	<Mesher.h>
+	<functions.h>
+	<Behaviors.h>
+	<stdlib.h>
 
-1529201937 source:e:\github\femsoft\include\functions.cpp
+1529250709 source:e:\github\femsoft\include\functions.cpp
+	<functions.h>
+
+1529249584 source:e:\github\femsoft\include\behaviors.cpp
+	<Behaviors.h>
+
+1529250285 source:e:\github\femsoft\include\elements.cpp
+	<Elements.h>
+
+1529257711 source:e:\github\femsoft\include\mesher.cpp
+	<Mesher.h>
 
