@@ -6,8 +6,8 @@
 #include <Behaviors.h>
 #include <stdlib.h>
 
-#define debug
-//#define release
+//#define debug
+#define release
 
 
 using namespace Eigen;
