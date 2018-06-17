@@ -7,15 +7,23 @@ using namespace Eigen;
 using namespace std;
 
 
+
 int main()
 {
     string filename("Model.ent");
     Mesh TestMesh(filename);
-    cout <<"Module d'Young du premier materiau: "<< TestMesh.self_MatArray[0].self_Young <<" Pa"<<endl;
-    cout <<"Coordonnees du premier Noeud: "<< TestMesh.self_NodeArray[0] <<endl;
-    cout <<"premier Element: "<< TestMesh.self_ElemArray[0] <<endl;
     //cout << TestMesh.self_ElemArray[0].self_StiffnessMat <<endl;
     TestMesh.assemble();
-    cout << TestMesh.self_MeshStiffnessMat <<endl;
+    TestMesh.LoadBC(filename);
+    cout << "Imposed Forces" << endl;
+    printVectf(TestMesh.self_Fvect);
+    cout << "Forces imposed at positions (in the force vector)" << endl;
+    printVectN(TestMesh.self_knownF);
+    cout << "Imposed U" << endl;
+    printVectf(TestMesh.self_Uvect);
+    cout << "U imposed at nodes at positions (in the U vector)" << endl;
+    printVectN(TestMesh.self_knownU);
+
+    return 0;
 }
 

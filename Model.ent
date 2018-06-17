@@ -14,4 +14,14 @@ N,1,1,1
 # B,ID,Node1,Node2,Section,Material
 B,0,0,1,1,0
 
+# Boundary conditions
+# U,X or Y,NodeID,value
+U,X,0,0
+U,Y,0,0
+
+# Loading conditions
+# F,X or Y,NodeID,value
+F,X,1,2
+F,Y,1,5
+
 

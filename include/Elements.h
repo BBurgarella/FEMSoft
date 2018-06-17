@@ -1,12 +1,9 @@
 #include <Behaviors.h>
 #include <iostream>
-#include <Eigen/Dense>
 #include <math.h>
+#include <functions.h>
 using namespace Eigen;
 
-// Prototypes
-
-MatrixXd CalculateRotationMat(double angle);
 
 
 /*  ########################################
@@ -197,20 +194,5 @@ std::ostream &operator<<(std::ostream &os, BarElement const &m)
     return os <<"This is a bar element(ID: "<<m.self_ID<<") linking the\n"<<m.self_Node1<<" and "<<m.self_Node2<<"\nWith a section surface of "<<m.self_Section<<" square meters\nAnd a length of "<<m.self_Length;
 }
 
-/* Définition de fonctions */
 
-MatrixXd CalculateRotationMat(double angle)
-// Computes the rotation matrix from an angle
-{
-    MatrixXd tempR = MatrixXd::Zero(4, 4);
-    tempR(0,0) = cos(angle);
-    tempR(0,1) = sin(angle);
-    tempR(1,0) = -sin(angle);
-    tempR(1,1) = cos(angle);
-    tempR(2,2) = cos(angle);
-    tempR(3,2) = -sin(angle);
-    tempR(2,3) = sin(angle);
-    tempR(3,3) = cos(angle);
-    return tempR;
-}
 

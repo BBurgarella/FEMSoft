@@ -35,6 +35,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Behaviors.h" />
+		<Unit filename="include/BoundaryConditions.h" />
 		<Unit filename="include/Elements.h" />
 		<Unit filename="include/Mesher.h" />
 		<Unit filename="main.cpp" />
