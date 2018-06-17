@@ -1,6 +1,15 @@
 # FEMSoft
-A simple C++ FEM soft that I programed to train C++
+A simple C++ FEM soft that I programed to train C++, This soft allows calculations on structures made from truss elements
 
+# Dependencies
+- Eigen (eigen.tuxfamily.org) -> used for linear algebra
+
+# What remains to be done:
+- Implement a simple function to get the results in a text file
+- It would be fun to parallelize this code but I have not had enough time yet
+
+# How to use it
+The binary file available in the bin/release file should be all you need if you only want to play with a FE Model
 To create a model, you have to use a text file named **Model.ent** (the ability to use different names will be implemented later) This file defines the mesh class that builds and stores the model . Such a file should be as follow:
 ```
 #### Simple model to test the mesher ####
