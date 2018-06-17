@@ -6,7 +6,7 @@ A simple C++ FEM soft that I programed to train C++, This soft allows calculatio
 
 # What remains to be done:
 - Implement a simple function to get the results in a text file
-- It would be fun to parallelize this code but I have not had enough time yet
+- It would be fun to parallelize this code but I didn't have time yet yet
 
 # How to use it
 The binary file available in the bin/release file should be all you need if you only want to play with a FE Model
