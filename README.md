@@ -2,7 +2,7 @@
 A simple C++ FEM soft that I programed to train C++
 
 To create a model, you have to use a text file named **Model.ent** (the ability to use different names will be implemented later) This file defines the mesh class that builds and stores the model . Such a file should be as follow:
-
+```
 #### Simple model to test the mesher ####
 
 #    Example case:
@@ -24,7 +24,7 @@ To create a model, you have to use a text file named **Model.ent** (the ability 
 #         this makes the stiffness matrix sigular     #
 #           and therefore prevent calculation         #
 #######################################################
-```
+
 # Fictional material
 # M, ID, Young,Nu
 M,0,1,0.5
