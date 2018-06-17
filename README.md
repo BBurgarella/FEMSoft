@@ -1,5 +1,5 @@
 # FEMSoft
-A simple C++ FEM soft that I programed to train C++, This soft allows calculations on structures made from truss elements
+A simple C++ Finite Element Modeling soft that I programed to train C++, This soft allows calculations on structures made from truss elements
 
 # Dependencies
 - Eigen (eigen.tuxfamily.org) -> used for linear algebra
