@@ -26,13 +26,11 @@ To create a model, you have to use a text file named **Model.ent** (the ability 
 #   the material used is a fictional material with a young modulus equal to 1
 #   and the section of the bar elements is also 1
 
-#######################################################
-#         Warning ! do not attemps calculations       #
-#           on structures that are not rigid          #
-#             (i.e. open shapes or lines)             #
-#         this makes the stiffness matrix sigular     #
-#           and therefore prevent calculation         #
-#######################################################
+#####################################################################
+#         Warning ! be careful on having a well defined model       #
+#                     If the boundary conditions are not            #
+#                  well defined, the matrix will be singular        #
+#####################################################################
 
 # Fictional material
 # M, ID, Young,Nu
